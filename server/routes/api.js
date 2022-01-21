@@ -3,29 +3,42 @@ const router = express.Router()
 const SoldItem = require('../models/SoldItem')
 const ItemToSell = require('../models/ItemToSell')
 
-router.get('bringAllProducts', (req, res) => {
-    //this rout will bring all the data from the database
-    res.send('Hello World!')
+router.get('/bringAllProductsToSale', (req, res) => {
+    ItemToSell.find({}, (err, items) => { 
+        if(err) {
+            res.send(err)
+        }
+        res.json(items)
+    })
+})
+
+router.post('/addItemToSale', (req, res) => { 
+    let itemData = req.body
+    let newItem = new ItemToSell(itemData)
+    newItem.save()
+    res.send("Item added to sale")
 })
 
 
-router.get('updateItem', (req, res) => {
-    //this rout will update the item from the database
-    res.send('Hello World!')
+router.post('/editItem/:id', (req, res) => { 
+    let itemData = req.body
+    ItemToSell.findByIdAndUpdate(req.params.id, itemData, (err, item) => { 
+        if(err) {
+            res.send(err)
+        }
+        res.send("Item updated")
+    })
 })
 
-
-
-router.get('deleteItem', (req, res) => {
-    //this rout will delete the item from the database
-    res.send('Hello World!')
+router.delete('/deleteItemFromSale/:id', (req, res) => { 
+    ItemToSell.findByIdAndRemove(req.params.id, (err, item) => {
+        if(err) {
+            res.send(err)
+        }
+        res.send("Item deleted from sale")
+    })
 })
 
-
-router.get('sellItem', (req, res) => {
-    //this rout will take one item from the item collection and remove it then add this item to aouther collection
-    res.send('Hello World!')
-})
 
 
 module.exports = router
