@@ -12,13 +12,13 @@ router.get('/bringAllProductsToSale', (req, res) => {
     })
 })
 
+
 router.post('/addItemToSale', (req, res) => { 
     let itemData = req.body
     let newItem = new ItemToSell(itemData)
     newItem.save()
     res.send("Item added to sale")
 })
-
 
 router.post('/editItem/:id', (req, res) => { 
     let itemData = req.body
@@ -36,6 +36,25 @@ router.delete('/deleteItemFromSale/:id', (req, res) => {
             res.send(err)
         }
         res.send("Item deleted from sale")
+    })
+})
+
+
+router.post('/addItemToSoledItems', (req, res) => { 
+    let itemData = req.body
+    let newItem = new SoldItem(itemData)
+    newItem.save()
+    res.send("Item added to sold items")
+})
+
+
+
+router.get('/bringAllSoledItems', (req, res) => {
+    SoldItem.find({}, (err, items) => { 
+        if(err) {
+            res.send(err)
+        }
+        res.json(items)
     })
 })
 
