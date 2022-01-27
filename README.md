@@ -1,12 +1,10 @@
-# full-stack-project-template
-A Basic jQuery, NodeJS &amp; MongoDB project template
+# THIS IS THE BACKEND OF THE [THIS](https://github.com/soferdani/WhistAssignment) REACT APP
 
-# Setup
-```
-$ npm install
-```
+Using Express and mongoose.
 
-# Run the Project
-```
-$ node server.js
-```
+
+## Installation
+
+    git clone https://github.com/soferdani/whistassignmentBack
+    cd whistassignmentBack
+    npm install
